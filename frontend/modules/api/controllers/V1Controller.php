@@ -20,16 +20,12 @@ class V1Controller extends Controller
         if (Yii::$app->request->post('json')){
             $event=json_decode(Yii::$app->request->post('json'));
             if(!json_last_error()){
-              //  if(!empty($event->api_token) && User::findByAuthKey($event->api_token)){
+                if(!empty($event->api_token) && User::findByAuthKey($event->api_token)){
                     $order = new Order();
                     $order->setNumber($event->order);
                     $order->sendMail();
-                    echo 123;echo 321;
-               // }
+                }
             }
-
         }
-
     }
-
 }

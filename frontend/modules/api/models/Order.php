@@ -21,7 +21,7 @@ class Order extends Model implements MailInterface
     {
         Yii::$app->mailer->compose('order',['number'=>$this->number])
             ->setTo(\Yii::$app->params['supportEmail'])
-            ->setFrom('test@yandex.ru')
+            ->setFrom('igor5777@yandex.ru')
             ->setSubject("письмо с заказом")
             ->send();
 

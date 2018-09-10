@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\Cookie;
 
 /**
  * Site controller
@@ -88,6 +89,10 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            $cookie=new Cookie();
+            $cookie->name='api_token';
+            $cookie->value=$model->user->auth_key;
+            Yii::$app->response->cookies->add($cookie);
             return $this->goBack();
         } else {
             $model->password = '';
